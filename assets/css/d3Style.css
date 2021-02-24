@@ -53,7 +53,7 @@
   }
   
   /* added */
-  .chart::before {
+  /* .chart::before {
     position: absolute;
     top: 50px;
     left: 300px;
@@ -62,12 +62,11 @@
     width: 400px;
     height: 300px;
     content: " ";
-    background-image: url("maxresdefault.jpg");
     background-repeat: no-repeat;
     background-position: 50% 0;
     background-size: cover;
     opacity: 0.3;
-  }
+  } */
   
   /* added */
   .tooltip {
@@ -91,7 +90,7 @@
     fill: #551aaf;
     text-anchor: middle;
   }
-  
+
   /* Mobile Rules */
   @media screen and (max-width: 530px) {
     .stateText {
