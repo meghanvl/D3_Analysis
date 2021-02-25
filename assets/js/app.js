@@ -1,7 +1,7 @@
 // healthcare vs poverty, smokers vs age, obesity vs income
 function makeResponsive() {
     // 
-    const svgArea = d3.select("body").select("svg");
+    let svgArea = d3.select("body").select("svg");
 
     // clear svg if it's not empty
     if (!svgArea.empty()) {
@@ -9,11 +9,11 @@ function makeResponsive() {
     }
 
     // svg container width and height
-    const svgWidth = 960;
-    const svgHeight = 500;
+    let svgWidth = 800;
+    let svgHeight = 550;
 
     // set margins 
-    const margin = {
+    let margin = {
         top: 20,
         right: 40,
         bottom: 80,
@@ -21,28 +21,28 @@ function makeResponsive() {
     };
 
     // chart area minus margins 
-    const width = svgWidth - margin.left - margin.right;
-    const height = svgHeight - margin.top - margin.bottom;
+    let width = svgWidth - margin.left - margin.right;
+    let height = svgHeight - margin.top - margin.bottom;
 
     // svg wrapper and group to hold chart
-    const svg = d3
-        .select("#scatter")
+    let svg = d3
+        .select(".chart")
         .append("svg")
         .attr("width", svgWidth)
         .attr("height", svgHeight);
 
     // append group element
-    const chartGroup = svg.append("g")
+    let chartGroup = svg.append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
     // x and y choices
-    const xChoice = "poverty";
-    const yChoice = "healthcare";
+    let xChoice = "poverty";
+    let yChoice = "healthcare";
 
 
     // function to update x scale upon click on x-axis label
     function xScale(ascData, xChoice) {
-        const xLinearScale = d3.scaleLinear()
+        let xLinearScale = d3.scaleLinear()
             .domain([d3.min(ascData, d => d[xChoice]) * 0.8,
                 d3.max(ascData, d => d[xChoice]) * 1.2
             ])
@@ -53,7 +53,7 @@ function makeResponsive() {
 
     // function to update y scale upon click on y-axis label
     function yScale(ascData, yChoice) {
-        const yLinearScale = d3.scaleLinear()
+        let yLinearScale = d3.scaleLinear()
             .domain([d3.min(ascData, d => d[yChoice]) * 0.8,
                 d3.max(ascData, d => d[yChoice]) *1.2
             ])
@@ -65,7 +65,7 @@ function makeResponsive() {
 
     // function to update x axis upon click
     function renderX(newX, xAxis) {
-        const bottomAxis = d3.axisBottom(newX);
+        let bottomAxis = d3.axisBottom(newX);
 
         xAxis.transition()
             .duration(1000)
@@ -76,7 +76,7 @@ function makeResponsive() {
 
         // function to update y axis upon click
     function renderY(newY, yAxis) {
-        const leftAxis = d3.axisLeft(newY);
+        let leftAxis = d3.axisLeft(newY);
 
         yAxis.transition()
             .duration(1000)
@@ -131,7 +131,7 @@ function makeResponsive() {
         }
 
         // initialize tooltip
-        const toolTip = d3.tip()
+        let toolTip = d3.tip()
             .attr("class", "tooltip d3-tip")
             .offset([90, 90])
             .html(function(d) {
@@ -172,35 +172,36 @@ function makeResponsive() {
             data.obesity = +data.obesity;
         });
 
-        const xLinearScale = xScale(ascData, xChoice);
-        const yLinearScale = yScale(ascData, yChoice);
+        let xLinearScale = xScale(ascData, xChoice);
+        let yLinearScale = yScale(ascData, yChoice);
 
-        const bottomAxis = d3.axisBottom(xLinearScale);
-        const leftAxis = d3.axisLeft(yLinearScale);
+        let bottomAxis = d3.axisBottom(xLinearScale);
+        let leftAxis = d3.axisLeft(yLinearScale);
 
-        const xAxis = chartGroup.append("g")
+        let xAxis = chartGroup.append("g")
             .classed("x-axis", true)
             .attr("transform", `translate(0, ${height})`)
             .call(bottomAxis);
     
-        const yAxis = chartGroup.append("g")
+        let yAxis = chartGroup.append("g")
             .classed("y-axis", true)
             .call(leftAxis);
 
     
-        const circlesGroup = chartGroup.selectAll("circle")
+        let circlesGroup = chartGroup.selectAll("stateCircle")
             .data(ascData)
             .enter()
             .append("circle")
             .attr("cx", d => xLinearScale(d[xChoice]))
             .attr("cy", d => yLinearScale(d[yChoice]))
-            .attr("r", 20)
-            .attr("opacity", ".5");
+            .attr("class", "stateCircle")
+            .attr("r", 15)
+            .attr("opacity", ".75");
     
-        const textGroup = chartGroup.selectAll("stateText")
+        let textGroup = chartGroup.selectAll("stateText")
             .data(ascData)
             .enter()
-            .append("stateText")
+            .append("text")
             .attr("x", d => xLinearScale(d[xChoice]))
             .attr("y", d => yLinearScale(d[yChoice]*.98))
             .text(d => (d.abbr))
@@ -209,68 +210,71 @@ function makeResponsive() {
             .attr("text-anchor", "middle")
             .attr("fill", "white");
 
-        const xLabels = chartGroup.append("g")
+        let xLabelGroup = chartGroup.append("g")
             .attr("transform", `translate(${width / 2}, ${height + 20})`);
 
-        const povertyLabel = xLabels.append("text")
+        let povertyLabel = xLabelGroup.append("text")
             .attr("x", 0)
             .attr("y", 20)
             .attr("value", "poverty")
-            .attr("dy", "1em")
+            // .attr("dy", "1em")
             .classed("active", true)
             .text("Poverty (%)");
     
-        const ageLabel = xLabels.append("text")
+        let ageLabel = xLabelGroup.append("text")
             .attr("x", 0)
             .attr("y", 40)
             .attr("value", "age")
-            .attr("dy", "1em")
+            // .attr("dy", "1em")
             .classed("active", true)
             .text("Age (Median)");
 
-        const incomeLabel = xLabels.append("text")
+        let incomeLabel = xLabelGroup.append("text")
             .attr("x", 0)
             .attr("y", 60)
             .attr("value", "income")
-            .attr("dy", "1em")
+            // .attr("dy", "1em")
             .classed("active", true)
             .text("Household Income (Median)");
 
-        const yLabels = chartGroup.append("g")
+        let yLabelGroup = chartGroup.append("g")
             .attr("transform", `translate(-25, ${height / 2})`);
     
-        const healthcareLabel = yLabels.append("text")
+        let healthcareLabel = yLabelGroup.append("text")
             .attr("transform", "rotate(-90)")
-            .attr("x", -30)
-            .attr("y", 0)
+            .attr("x", 0)
+            .attr("y", -20)
             .attr("value", "healthcare")
-            .attr("dy", "1em")
+            // .attr("dy", "1em")
+            .classed("axis-text", true)
             .classed("active", true)
             .text("Lacks Healthcare (%)");
 
-        const smokersLabel = yLabels.append("text")
+        let smokersLabel = yLabelGroup.append("text")
             .attr("transform", "rotate(-90)")
-            .attr("x", -50)
-            .attr("y", 0)
+            .attr("x", 0)
+            .attr("y", -40)
             .attr("value", "smokes")
-            .attr("dy", "1em")
+            // .attr("dy", "2em")
+            .classed("axis-text", true)
             .classed("active", true)
             .text("Smokes (%)");
 
-        const obesityLabel = yLabels.append("text")
+        let obesityLabel = yLabelGroup.append("text")
             .attr("transform", "rotate(-90)")
-            .attr("x", -70)
-            .attr("y", 0)
+            .attr("x", 0)
+            .attr("y", -60)
             .attr("value", "obesity")
-            .attr("dy", "1em")
+            // .attr("dy", "1em")
+            .classed("axis-text", true)
             .classed("active", true)
             .text("Obese (%)");
     
-        // const circlesGroup = updateToolTip(xChoice, yChoice, circlesGroup, textGroup); 
+        // let circlesGroup = updateToolTip(xChoice, yChoice, circlesGroup, textGroup); 
 
-        XLabelsGroup.selectAll("text")
+        xLabelGroup.selectAll("text")
             .on("click", function() {
-                const value = d3.select(this).attr("value");
+                let value = d3.select(this).attr("value");
 
                 if (value !== xChoice) {
                     xChoice = value;
@@ -321,9 +325,9 @@ function makeResponsive() {
                 }
             });
 
-        YLabelsGroup.selectAll("text")
+        yLabelGroup.selectAll("text")
             .on("click", function() {
-                const value = d3.select(this).attr("value");
+                let value = d3.select(this).attr("value");
 
                 if (value !== yChoice) {
                     yChoice = value;
@@ -373,9 +377,8 @@ function makeResponsive() {
                     }
                 }
             });
-    }).catch(function(error) {
-    console.log(error);
     });
+
 
 }   
 
