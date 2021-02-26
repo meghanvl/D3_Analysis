@@ -9,13 +9,13 @@ function makeResponsive() {
     }
 
     // svg container width and height
-    let svgWidth = 800;
+    let svgWidth = 940;
     let svgHeight = 550;
 
     // set margins 
     let margin = {
         top: 20,
-        right: 40,
+        right: 100,
         bottom: 80,
         left: 100
     };
@@ -60,7 +60,6 @@ function makeResponsive() {
             .range([height, 0]);
 
         return yLinearScale;
-
     }
 
     // function to update x axis upon click
@@ -135,7 +134,7 @@ function makeResponsive() {
             .attr("class", "tooltip d3-tip")
             .offset([90, 90])
             .html(function(d) {
-                return (`${d.abbr}<br>${xLabel} ${d[xChoice]}<br>${yLabel} ${d[yChoice]}`);
+                return (`State: ${d.abbr}<br>${xLabel}: ${d[xChoice]}<br>${yLabel}: ${d[yChoice]}`);
             });
 
         circlesGroup.call(toolTip);
@@ -168,7 +167,7 @@ function makeResponsive() {
             data.age = +data.age;
             data.income = +data.income;
             data.healthcare = +data.healthcare;
-            data.smokers = +data.smokes;
+            data.smokes = +data.smokes;
             data.obesity = +data.obesity;
         });
 
@@ -196,7 +195,7 @@ function makeResponsive() {
             .attr("cy", d => yLinearScale(d[yChoice]))
             .attr("class", "stateCircle")
             .attr("r", 15)
-            .attr("opacity", ".75");
+            .attr("opacity", ".95");
     
         let textGroup = chartGroup.selectAll("stateText")
             .data(ascData)
@@ -217,7 +216,6 @@ function makeResponsive() {
             .attr("x", 0)
             .attr("y", 20)
             .attr("value", "poverty")
-            // .attr("dy", "1em")
             .classed("active", true)
             .text("Poverty (%)");
     
@@ -226,7 +224,7 @@ function makeResponsive() {
             .attr("y", 40)
             .attr("value", "age")
             // .attr("dy", "1em")
-            .classed("active", true)
+            .classed("inactive", true)
             .text("Age (Median)");
 
         let incomeLabel = xLabelGroup.append("text")
@@ -234,7 +232,7 @@ function makeResponsive() {
             .attr("y", 60)
             .attr("value", "income")
             // .attr("dy", "1em")
-            .classed("active", true)
+            .classed("inactive", true)
             .text("Household Income (Median)");
 
         let yLabelGroup = chartGroup.append("g")
@@ -257,7 +255,7 @@ function makeResponsive() {
             .attr("value", "smokes")
             // .attr("dy", "2em")
             .classed("axis-text", true)
-            .classed("active", true)
+            .classed("inactive", true)
             .text("Smokes (%)");
 
         let obesityLabel = yLabelGroup.append("text")
@@ -267,7 +265,7 @@ function makeResponsive() {
             .attr("value", "obesity")
             // .attr("dy", "1em")
             .classed("axis-text", true)
-            .classed("active", true)
+            .classed("inactive", true)
             .text("Obese (%)");
     
         // let circlesGroup = updateToolTip(xChoice, yChoice, circlesGroup, textGroup); 
@@ -342,6 +340,7 @@ function makeResponsive() {
 
                     circlesGroup = updateToolTip(xChoice, yChoice, circlesGroup, textGroup);
 
+                    // changes classes to bold text
                     if (yChoice === "healthcare") {
                         healthcareLabel
                             .classed("active", true)
