@@ -223,7 +223,6 @@ function makeResponsive() {
             .attr("x", 0)
             .attr("y", 40)
             .attr("value", "age")
-            // .attr("dy", "1em")
             .classed("inactive", true)
             .text("Age (Median)");
 
@@ -231,7 +230,6 @@ function makeResponsive() {
             .attr("x", 0)
             .attr("y", 60)
             .attr("value", "income")
-            // .attr("dy", "1em")
             .classed("inactive", true)
             .text("Household Income (Median)");
 
@@ -243,7 +241,6 @@ function makeResponsive() {
             .attr("x", 0)
             .attr("y", -20)
             .attr("value", "healthcare")
-            // .attr("dy", "1em")
             .classed("axis-text", true)
             .classed("active", true)
             .text("Lacks Healthcare (%)");
@@ -253,7 +250,6 @@ function makeResponsive() {
             .attr("x", 0)
             .attr("y", -40)
             .attr("value", "smokes")
-            // .attr("dy", "2em")
             .classed("axis-text", true)
             .classed("inactive", true)
             .text("Smokes (%)");
@@ -263,7 +259,6 @@ function makeResponsive() {
             .attr("x", 0)
             .attr("y", -60)
             .attr("value", "obesity")
-            // .attr("dy", "1em")
             .classed("axis-text", true)
             .classed("inactive", true)
             .text("Obese (%)");
