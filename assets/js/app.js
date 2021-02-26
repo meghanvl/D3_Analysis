@@ -9,7 +9,7 @@ function makeResponsive() {
     }
 
     // svg container width and height
-    let svgWidth = 940;
+    let svgWidth = 960;
     let svgHeight = 550;
 
     // set margins 
@@ -117,10 +117,10 @@ function makeResponsive() {
             xLabel = "Age (Median)";
         }
         else {
-            xLabel = "Household Income (Median)";
+            xLabel = "Income (Median)";
         }
         if (yChoice === "healthcare") {
-            yLabel = "Lacks Healthcare (%)";
+            yLabel = "Healthcare (%)";
         }
         else if (yChoice === "smokes") {
             yLabel = "Smokes (%)";
@@ -186,7 +186,6 @@ function makeResponsive() {
             .classed("y-axis", true)
             .call(leftAxis);
 
-    
         let circlesGroup = chartGroup.selectAll("stateCircle")
             .data(ascData)
             .enter()
