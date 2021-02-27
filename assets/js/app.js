@@ -134,7 +134,7 @@ function makeResponsive() {
             .attr("class", "tooltip d3-tip")
             .offset([90, 90])
             .html(function(d) {
-                return (`State: ${d.abbr}<br>${xLabel}: ${d[xChoice]}<br>${yLabel}: ${d[yChoice]}`);
+                return (`State: ${d.state}<br>${xLabel}: ${d[xChoice]}<br>${yLabel}: ${d[yChoice]}`);
             });
 
         circlesGroup.call(toolTip);
