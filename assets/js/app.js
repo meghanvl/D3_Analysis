@@ -198,6 +198,7 @@ function makeResponsive() {
             .classed("y-axis", true)
             .call(leftAxis);
 
+        // append initial circles
         let circlesGroup = chartGroup.selectAll("stateCircle")
             .data(ascData)
             .enter()
@@ -208,6 +209,7 @@ function makeResponsive() {
             .attr("r", 15)
             .attr("opacity", ".95");
     
+        // append initial text in circles
         let textGroup = chartGroup.selectAll("stateText")
             .data(ascData)
             .enter()
@@ -220,6 +222,7 @@ function makeResponsive() {
             .attr("text-anchor", "middle")
             .attr("fill", "white");
 
+        // group for x-axis labels
         let xLabelGroup = chartGroup.append("g")
             .attr("transform", `translate(${width / 2}, ${height + 20})`);
 
@@ -244,6 +247,7 @@ function makeResponsive() {
             .classed("inactive", true)
             .text("Household Income (Median)");
 
+        // group for y-axis labels
         let yLabelGroup = chartGroup.append("g")
             .attr("transform", `translate(-25, ${height / 2})`);
     
