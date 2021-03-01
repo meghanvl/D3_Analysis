@@ -11,14 +11,14 @@ function makeResponsive() {
     }
 
     // svg container width and height
-    let svgWidth = 970;
+    let svgWidth = 1000;
     let svgHeight = 550;
 
     // set margins 
     let margin = {
         top: 20,
-        right: 100,
-        bottom: 80,
+        right: 80,
+        bottom: 100,
         left: 100
     };
 
@@ -138,7 +138,7 @@ function makeResponsive() {
             .attr("class", "tooltip d3-tip")
             .offset([90, 90])
             .html(function(d) {
-                return (`${d.state}<br>${xLabel}: ${d[xChoice]}<br>${yLabel}: ${d[yChoice]}`);
+                return (`State: ${d.state}<br>${xLabel}: ${d[xChoice]}<br>${yLabel}: ${d[yChoice]}`);
             });
 
         circlesGroup.call(toolTip);
@@ -347,7 +347,7 @@ function makeResponsive() {
 
                 if (value !== yChoice) {
                     yChoice = value;
-
+                    
                     yLinearScale = yScale(ascData, yChoice);
 
                     yAxis = renderY(yLinearScale, yAxis);
