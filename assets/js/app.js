@@ -138,7 +138,7 @@ function makeResponsive() {
             .attr("class", "tooltip d3-tip")
             .offset([90, 90])
             .html(function(d) {
-                return (`State: ${d.state}<br>${xLabel}: ${d[xChoice]}<br>${yLabel}: ${d[yChoice]}`);
+                return (`${d.state}<br>${xLabel}: ${d[xChoice]}<br>${yLabel}: ${d[yChoice]}`);
             });
 
         circlesGroup.call(toolTip);
@@ -347,7 +347,7 @@ function makeResponsive() {
 
                 if (value !== yChoice) {
                     yChoice = value;
-                    
+
                     yLinearScale = yScale(ascData, yChoice);
 
                     yAxis = renderY(yLinearScale, yAxis);
