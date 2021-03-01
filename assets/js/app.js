@@ -143,7 +143,7 @@ function makeResponsive() {
 
         circlesGroup.call(toolTip);
 
-        // mouseover event
+        // circles mouseover event
         circlesGroup.on("mouseover", function(data) {
             toolTip.show(data, this);
         })
@@ -151,7 +151,8 @@ function makeResponsive() {
             .on("mouseout", function(data) {
                 toolTip.hide(data);
             });
-
+        
+        // text mousover event and mouseout
         textGroup.on("mouseover", function(data) {
             toolTip.show(data, this);
         })
