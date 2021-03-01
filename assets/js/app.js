@@ -277,18 +277,21 @@ function makeResponsive() {
             .classed("axis-text", true)
             .classed("inactive", true)
             .text("Obese (%)");
-    
-        // let circlesGroup = updateToolTip(xChoice, yChoice, circlesGroup, textGroup); 
-
+     
+        // x-axis labels event listener
         xLabelGroup.selectAll("text")
             .on("click", function() {
+                // first get the value
                 let value = d3.select(this).attr("value");
 
                 if (value !== xChoice) {
+                    // replaces chosen x-axis with value
                     xChoice = value;
 
+                    // updates x scale with new data
                     xLinearScale = xScale(ascData, xChoice);
 
+                    // updates x-axis with transition
                     xAxis = renderX(xLinearScale, xAxis);
 
                     circlesGroup = renderCircles(circlesGroup, xLinearScale, xChoice, yLinearScale, yChoice);
