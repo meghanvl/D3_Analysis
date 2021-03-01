@@ -1,4 +1,6 @@
 // healthcare vs poverty, smokers vs age, obesity vs income
+
+// function to make page responsive, resizes chart
 function makeResponsive() {
     // 
     let svgArea = d3.select("body").select("svg");
@@ -35,7 +37,7 @@ function makeResponsive() {
     let chartGroup = svg.append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-    // x and y choices
+    // x and y initial parameters
     let xChoice = "poverty";
     let yChoice = "healthcare";
 
