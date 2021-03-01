@@ -294,12 +294,16 @@ function makeResponsive() {
                     // updates x-axis with transition
                     xAxis = renderX(xLinearScale, xAxis);
 
+                    // updates circles with new x data
                     circlesGroup = renderCircles(circlesGroup, xLinearScale, xChoice, yLinearScale, yChoice);
 
+                    // updates text with new data
                     textGroup = renderText(textGroup, xLinearScale, xChoice, yLinearScale, yChoice);
 
+                    // updates the tooltip 
                     circlesGroup = updateToolTip(xChoice, yChoice, circlesGroup, textGroup);
 
+                    // bold classes when selected
                     if (xChoice === "poverty") {
                         povertyLabel
                             .classed("active", true)
