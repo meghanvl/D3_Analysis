@@ -44,6 +44,7 @@ function makeResponsive() {
 
     // function to update x scale upon click on x-axis label
     function xScale(ascData, xChoice) {
+        // create scales
         let xLinearScale = d3.scaleLinear()
             .domain([d3.min(ascData, d => d[xChoice]) * 0.8,
                 d3.max(ascData, d => d[xChoice]) * 1.2
@@ -96,6 +97,7 @@ function makeResponsive() {
         return circlesGroup;
     }
 
+    // update the text in circles
     function renderText(textGroup, newX, xChoice, newY, yChoice) {
         textGroup.transition()
             .duration(1000)
@@ -141,10 +143,11 @@ function makeResponsive() {
 
         circlesGroup.call(toolTip);
 
+        // mouseover event
         circlesGroup.on("mouseover", function(data) {
             toolTip.show(data, this);
         })
-
+            // mouseout event
             .on("mouseout", function(data) {
                 toolTip.hide(data);
             });
