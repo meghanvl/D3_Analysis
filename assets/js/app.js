@@ -9,7 +9,7 @@ function makeResponsive() {
     }
 
     // svg container width and height
-    let svgWidth = 960;
+    let svgWidth = 970;
     let svgHeight = 550;
 
     // set margins 
