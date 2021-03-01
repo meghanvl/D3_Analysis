@@ -303,7 +303,7 @@ function makeResponsive() {
                     // updates the tooltip 
                     circlesGroup = updateToolTip(xChoice, yChoice, circlesGroup, textGroup);
 
-                    // bold classes when selected
+                    // changes classes to bold text
                     if (xChoice === "poverty") {
                         povertyLabel
                             .classed("active", true)
@@ -340,13 +340,14 @@ function makeResponsive() {
                 }
             });
 
+        // y-axis labels event listener
         yLabelGroup.selectAll("text")
             .on("click", function() {
                 let value = d3.select(this).attr("value");
 
                 if (value !== yChoice) {
                     yChoice = value;
-
+                    
                     yLinearScale = yScale(ascData, yChoice);
 
                     yAxis = renderY(yLinearScale, yAxis);
@@ -398,8 +399,10 @@ function makeResponsive() {
 
 }   
 
+// function called when browser loads
 makeResponsive();
 
+// when browser window is resized, makeResponsive is called
 d3.select(window).on("resize", makeResponsive);
 
 
