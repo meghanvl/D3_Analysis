@@ -165,9 +165,11 @@ function makeResponsive() {
 
     }
 
+    // get data from csv file
     d3.csv("assets/data/data.csv").then(function(ascData, err) {
         if (err) throw err;
 
+        // parse data as integers
         ascData.forEach(function(data) {
             data.poverty = +data.poverty;
             data.age = +data.age;
@@ -177,17 +179,21 @@ function makeResponsive() {
             data.obesity = +data.obesity;
         });
 
+        // scale functions
         let xLinearScale = xScale(ascData, xChoice);
         let yLinearScale = yScale(ascData, yChoice);
 
+        // initial axis functions
         let bottomAxis = d3.axisBottom(xLinearScale);
         let leftAxis = d3.axisLeft(yLinearScale);
 
+        // append x-axis
         let xAxis = chartGroup.append("g")
             .classed("x-axis", true)
             .attr("transform", `translate(0, ${height})`)
             .call(bottomAxis);
     
+        // append y-axis
         let yAxis = chartGroup.append("g")
             .classed("y-axis", true)
             .call(leftAxis);
